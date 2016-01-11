@@ -1,22 +1,21 @@
-import com.google.gson.JsonSerializer;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonParseException;
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonPrimitive;
-import com.google.gson.JsonSerializationContext;
-import com.google.gson.JsonDeserializationContext;
-
 import java.lang.reflect.Type;
 
-public class IAnimalAdapter implements JsonSerializer<IAnimal>, JsonDeserializer<IAnimal> {
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
+import com.google.gson.JsonPrimitive;
+import com.google.gson.JsonSerializationContext;
+import com.google.gson.JsonSerializer;
+
+public class PolymorficAdapter<T> implements JsonSerializer<T>, JsonDeserializer<T> {
 
 	private static final String CLASSNAME = "CLASSNAME";
 	private static final String INSTANCE = "INSTANCE";
 
 	@Override
-	public JsonElement serialize(IAnimal src, Type typeOfSrc, JsonSerializationContext context) {
+	public JsonElement serialize(T src, Type typeOfSrc, JsonSerializationContext context) {
 
 		JsonObject retValue = new JsonObject();
 		String className = src.getClass().getName();
@@ -27,7 +26,7 @@ public class IAnimalAdapter implements JsonSerializer<IAnimal>, JsonDeserializer
 	}
 
 	@Override
-	public IAnimal deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+	public T deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
 		JsonObject jsonObject = json.getAsJsonObject();
 		JsonPrimitive prim = (JsonPrimitive) jsonObject.get(CLASSNAME);
 		String className = prim.getAsString();
