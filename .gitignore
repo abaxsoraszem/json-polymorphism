@@ -1,3 +1,7 @@
 build/
 dist/
 lib-ivy/
+/target/
+/.settings/
+/.classpath
+/.project

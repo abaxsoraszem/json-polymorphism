@@ -1,7 +1,7 @@
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-public class Test {
+public class AnimalTest {
 
     public static void main(String[] args) {
         IAnimal animals[] = new IAnimal[]{new Cat("Kitty"), new Dog("Brutus", 5)};
